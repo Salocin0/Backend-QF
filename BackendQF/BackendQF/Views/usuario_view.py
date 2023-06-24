@@ -9,9 +9,9 @@ class vistaUsuario(View):
     def post(self, request):
         data = json.loads(request.body.decode('utf-8'))
         nombre,apellido, = data.get('nombre','apellido')
-        consumidor= Consumidor()
+        #consumidor= Consumidor()
         
-        consumidor.save
+        #consumidor.save
         response_data = {'message': 'POST: Funciona'+nombre}
         return JsonResponse(response_data)
     

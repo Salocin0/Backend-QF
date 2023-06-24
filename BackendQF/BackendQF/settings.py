@@ -34,12 +34,15 @@ CSRF_COOKIE_SAMESITE = None
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'consumidor',
+    'usuario'
 ]
 
 MIDDLEWARE = [
@@ -79,8 +82,8 @@ WSGI_APPLICATION = 'BackendQF.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'MySQL',
-        'USER': 'jucetta',
+        'NAME': 'djangodb',
+        'USER': 'Salocin0',
         'PASSWORD': 'ProyectoFinal',
         'HOST': 'localhost',
         'PORT': '3306',

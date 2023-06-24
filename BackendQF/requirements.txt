@@ -1,0 +1,6 @@
+#Librerias requeridas para el backend
+
+Python==3.9.16
+Django==4.2.2
+pymysql==1.0.2
+mysqlclient==2.2.0

@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -83,9 +84,9 @@ WSGI_APPLICATION = 'BackendQF.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodb',
-        'USER': 'Salocin0',
-        'PASSWORD': 'ProyectoFinal',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
@@ -143,7 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Reemplaza con el servidor de correo saliente que desees utilizar
 EMAIL_PORT = 587  # Reemplaza con el puerto adecuado para el servidor de correo saliente
-EMAIL_HOST_USER = ''  # Reemplaza con tu dirección de correo electrónico
-EMAIL_HOST_PASSWORD = ''  # Reemplaza con tu contraseña de correo electrónico
+EMAIL_HOST_USER = config('NAME_EMAIL')  # Reemplaza con tu dirección de correo electrónico
+EMAIL_HOST_PASSWORD = config('SECRET_EMAIL')  # Reemplaza con tu contraseña de correo electrónico
 EMAIL_USE_TLS = True  # Utiliza TLS para una conexión segura
-DEFAULT_FROM_EMAIL = ''  # Reemplaza con tu dirección de correo electrónico
+DEFAULT_FROM_EMAIL = config('NAME_EMAIL')  # Reemplaza con tu dirección de correo electrónico

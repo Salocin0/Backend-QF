@@ -17,7 +17,10 @@ class VistaRecuperarContraseña(View):
             try:
                 user = Usuario.objects.get(correoElectronico=email)
                 codigo = hashlib.sha256(email.encode('utf-8')).hexdigest()[:50]
-                RecuperarContraseña.objects.create(usuario=user, codigo=codigo)
+                try:
+                    recuperarContraseña = RecuperarContraseña.objects.get(codigo=codigo)
+                except RecuperarContraseña.DoesNotExist:
+                    RecuperarContraseña.objects.create(usuario=user, codigo=codigo)
                 send_mail(
                     'Recuperar contraseña',  # Asunto del correo
                     'Se solicitó un cambio de contraseña. Para cambiar tu contraseña, haz clic en el siguiente enlace: http://127.0.0.1:8000/user/recuperarContraseña/' + str(codigo),  # Cuerpo del correo
@@ -41,8 +44,9 @@ class VistaRecuperarContraseña(View):
             try:
                 recuperarContraseña= RecuperarContraseña.objects.get(codigo=codigo)
                 user = Usuario.objects.get(correoElectronico=recuperarContraseña.usuario.correoElectronico)
-                user.contraseña=contraseña
-                Usuario.objects.update(user)
+                user.contraseña = contraseña
+                user.save()
+                recuperarContraseña.delete()
                 response_data = {
                     'message': 'contraseña actualizada.',
                 }
@@ -50,7 +54,5 @@ class VistaRecuperarContraseña(View):
                 response_data = {
                     'error':'no existe peticion para recuperar contraseña',
                     'codigo':1010
-                }
-
-            
+                } 
         return JsonResponse(response_data)

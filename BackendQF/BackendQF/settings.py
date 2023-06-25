@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'consumidor',
-    'usuario'
+    'usuario',
+    'recuperarContraseña'
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Reemplaza con el servidor de correo saliente que desees utilizar
+EMAIL_PORT = 587  # Reemplaza con el puerto adecuado para el servidor de correo saliente
+EMAIL_HOST_USER = ''  # Reemplaza con tu dirección de correo electrónico
+EMAIL_HOST_PASSWORD = ''  # Reemplaza con tu contraseña de correo electrónico
+EMAIL_USE_TLS = True  # Utiliza TLS para una conexión segura
+DEFAULT_FROM_EMAIL = ''  # Reemplaza con tu dirección de correo electrónico

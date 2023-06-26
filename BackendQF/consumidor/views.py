@@ -30,11 +30,13 @@ class vistaConsumidor(View):
                 consumidor_data = model_to_dict(consumidor)
                 response_data = {
                     'message': 'Consumidor encontrado',
+                    'codigo':200,
                     'consumidor':consumidor_data
                 }
             except Consumidor.DoesNotExist:
                 consumidor_data = {
                     'message': 'Consumidor no encontrado.',
+                    'codigo':400,
                     'consumidor': {},
                 }
         return JsonResponse(response_data)

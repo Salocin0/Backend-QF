@@ -32,13 +32,6 @@ class vistaUsuario(View):
         response_data = {'message': 'Consumidor created successfully'}
         return JsonResponse(response_data)
 
-    
-    def get(cls, request):
-        # Lógica para cuando no se proporciona un ID
-        
-        
-        return JsonResponse(response_data)
-
     def get(self, request, id=None):
         if id is None:
             usuarios = Usuario.objects.all()  # Obtener todos los usuarios de la base de datos

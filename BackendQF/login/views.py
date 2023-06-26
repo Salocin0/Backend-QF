@@ -5,6 +5,7 @@ from django.forms.models import model_to_dict
 import json
 from django.shortcuts import render
 from usuario.models import Usuario
+from consumidor.models import Consumidor
 class vistaLogin(View):
     def post(self, request):
         data = json.loads(request.body.decode('utf-8'))
@@ -12,11 +13,13 @@ class vistaLogin(View):
         contraseña = data.get('contraseña')
         try:
             user = Usuario.objects.get(correoElectronico=email)
+            consumidor = Consumidor.objects.get(usuario=user)
             if(user.contraseña==contraseña):
                 response_data = {
                     'authenticated': True,
                     'error':'',
-                    'codigo':200
+                    'codigo':200,
+                    'id_consumidor':consumidor.id
                     }
             else:
                 response_data = {

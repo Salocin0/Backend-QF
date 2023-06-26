@@ -8,33 +8,42 @@ import json
 #views == logica de negocio
 class vistaUsuario(View):
     def post(self, request):
-        data = json.loads(request.body.decode('utf-8'))
-        consumidor_data = data.get('consumidor')
-        usuario_data = consumidor_data.get('usuario') 
+        try:
+            data = json.loads(request.body.decode('utf-8'))
+            consumidor_data = data.get('consumidor')
+            usuario_data = consumidor_data.get('usuario') 
 
-        usuario = Usuario.objects.create(
-            contraseña=usuario_data['contraseña'],
-            fechaAlta=usuario_data['fechaAlta'],
-            nombreDeUsuario=usuario_data['nombreDeUsuario'],
-            correoElectronico=usuario_data['correoElectronico']
-        )
+            usuario = Usuario.objects.create(
+                contraseña=usuario_data['contraseña'],
+                fechaAlta=usuario_data['fechaAlta'],
+                nombreDeUsuario=usuario_data['nombreDeUsuario'],
+                correoElectronico=usuario_data['correoElectronico']
+            )
 
-        consumidor = Consumidor.objects.create(
-            nombre=consumidor_data['nombre'],
-            apellido=consumidor_data['apellido'],
-            fechaDeNacimiento=consumidor_data['fechaDeNacimiento'],
-            dni=consumidor_data['dni'],
-            localidad=consumidor_data['localidad'],
-            telefono=consumidor_data['telefono'],
-            usuario=usuario
-        )
+            consumidor = Consumidor.objects.create(
+                nombre=consumidor_data['nombre'],
+                apellido=consumidor_data['apellido'],
+                fechaDeNacimiento=consumidor_data['fechaDeNacimiento'],
+                dni=consumidor_data['dni'],
+                localidad=consumidor_data['localidad'],
+                telefono=consumidor_data['telefono'],
+                usuario=usuario
+            )
 
-        response_data = {'message': 'Consumidor created successfully'}
+            response_data = {
+                'message': 'Consumidor created successfully',
+                'code':200
+            }
+        except Exception as e:
+            response_data = {
+                'message': 'Error al guardar',
+                'code': 400
+            }
         return JsonResponse(response_data)
 
     def get(self, request, id=None):
         if id is None:
-            usuarios = Usuario.objects.all()  # Obtener todos los usuarios de la base de datos
+            usuarios = Usuario.objects.all()
             response_data = {
                 'message': 'Usuarios encontrados.',
                 'usuarios': []

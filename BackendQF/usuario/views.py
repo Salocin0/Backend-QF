@@ -15,7 +15,6 @@ class vistaUsuario(View):
 
             usuario = Usuario.objects.create(
                 contraseña=usuario_data['contraseña'],
-                fechaAlta=usuario_data['fechaAlta'],
                 nombreDeUsuario=usuario_data['nombreDeUsuario'],
                 correoElectronico=usuario_data['correoElectronico']
             )
@@ -35,6 +34,7 @@ class vistaUsuario(View):
                 'code':200
             }
         except Exception as e:
+            print(str(e))
             response_data = {
                 'message': 'Error al guardar',
                 'code': 400

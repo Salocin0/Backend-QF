@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'consumidor',
     'usuario',
     'recuperarContraseña',
+    'funcionesNavbar',
     'corsheaders',
 ]
 
